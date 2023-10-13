@@ -17,8 +17,8 @@ CREATE TABLE director
 CREATE TABLE movie
 (
     id           serial PRIMARY KEY,
-    name         varchar(20)  NOT NULL,
-    description  varchar(200) NOT NULL,
+    name         varchar(120)  NOT NULL,
+    description  varchar(2048) NOT NULL,
     release_date DATE         NOT NULL,
     id_director  serial,
     FOREIGN KEY (id_director) REFERENCES director (id)

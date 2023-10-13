@@ -16,6 +16,8 @@ public class Actor {
 
     private ZonedDateTime birthDay;
 
+    //private boolean isDirector;
+
     @Id
     public Long getId() {
         return id;

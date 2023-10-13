@@ -3,6 +3,8 @@ package com.hazrody.cinema.ws;
 import com.hazrody.cinema.dao.entity.Actor;
 import com.hazrody.cinema.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +29,14 @@ public class ActorWebService {
         }
     }
 
+
     @GetMapping("/")
-    public ResponseEntity<List<Actor>> getAllActor() {
-        return ResponseEntity.ok(actorService.getAllActor());
+    public ResponseEntity<Page<Actor>> getAllActor(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return ResponseEntity.ok(actorService.getAllActor(pageRequest));
     }
 
     @PutMapping("/")

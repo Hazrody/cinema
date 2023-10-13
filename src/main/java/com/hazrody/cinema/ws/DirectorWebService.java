@@ -4,6 +4,8 @@ package com.hazrody.cinema.ws;
 import com.hazrody.cinema.dao.entity.Director;
 import com.hazrody.cinema.service.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +31,12 @@ public class DirectorWebService {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Director>> getAllDirector() {
-        return ResponseEntity.ok(directorService.getAllDirector());
+    public ResponseEntity<Page<Director>> getAllDirector(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return ResponseEntity.ok(directorService.getAllDirector(pageRequest));
     }
 
     @PutMapping("/")

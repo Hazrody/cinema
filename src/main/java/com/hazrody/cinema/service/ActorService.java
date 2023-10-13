@@ -3,6 +3,8 @@ package com.hazrody.cinema.service;
 import com.hazrody.cinema.dao.entity.Actor;
 import com.hazrody.cinema.dao.repository.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class ActorService {
         return actorRepository.findById(id);
     }
 
-    public List<Actor> getAllActor() {
-        return actorRepository.findAll();
+    public Page<Actor> getAllActor(PageRequest pageRequest) {
+        return actorRepository.findAll(pageRequest);
     }
 
     public Actor createOrUpdateActor(Actor newActor) {

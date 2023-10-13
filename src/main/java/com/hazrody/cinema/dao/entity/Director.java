@@ -20,6 +20,8 @@ public class Director {
 
     private ZonedDateTime birthDay;
 
+    //private boolean isActor;
+
 
     public Long getId() {
         return id;
