@@ -20,4 +20,36 @@ public class Director {
 
     private ZonedDateTime birthDay;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public ZonedDateTime getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(ZonedDateTime birthDay) {
+        this.birthDay = birthDay;
+    }
 }
