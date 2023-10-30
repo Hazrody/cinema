@@ -1,15 +1,20 @@
 package com.hazrody.cinema.ws;
 
 
+
 import com.hazrody.cinema.dao.entity.Movie;
 import com.hazrody.cinema.service.MovieService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -21,6 +26,29 @@ public class MovieWebService {
     @Autowired
     MovieService movieService;
 
+    @Operation(
+            summary = "Récupère un film par son identifiant.",
+            description = "Récupère un film par son identifiant.",
+            responses = {
+                    @ApiResponse(
+                            description = "OK",
+                            responseCode = "200",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = Movie.class))
+                                    )
+                            }
+                    ),
+                    @ApiResponse(
+                            description = "Identifiant du film invalide",
+                            responseCode = "404",
+                            content = @Content(
+                                    mediaType = "application/json"
+                            )
+                    )
+            }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<?> getMovie(@PathVariable("id") Long id) {
         Optional<Movie> movieOptional = movieService.getMovieById(id);
@@ -31,6 +59,29 @@ public class MovieWebService {
         }
     }
 
+    @Operation(
+            summary = "Récupère tous les films existants.",
+            description = "Récupère tous les films existants.",
+            responses = {
+                    @ApiResponse(
+                            description = "OK",
+                            responseCode = "200",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = Movie.class))
+                                    )
+                            }
+                    ),
+                    @ApiResponse(
+                            description = "Identifiant du film invalide",
+                            responseCode = "404",
+                            content = @Content(
+                                    mediaType = "application/json"
+                            )
+                    )
+            }
+    )
     @GetMapping("/")
     public ResponseEntity<Page<Movie>> getAllMovie(
             @RequestParam(defaultValue = "0") int page,
@@ -39,6 +90,29 @@ public class MovieWebService {
         return ResponseEntity.ok(movieService.getAllMovie(pageRequest));
     }
 
+    @Operation(
+            summary = "Met à jour un film existant.",
+            description = "Met à jour un film existant.",
+            responses = {
+                    @ApiResponse(
+                            description = "OK",
+                            responseCode = "200",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = Movie.class))
+                                    )
+                            }
+                    ),
+                    @ApiResponse(
+                            description = "Identifiant du film invalide",
+                            responseCode = "404",
+                            content = @Content(
+                                    mediaType = "application/json"
+                            )
+                    )
+            }
+    )
     @PutMapping("/")
     public ResponseEntity<Movie> updateMovie(
             @RequestBody Movie newMovie) {
@@ -46,6 +120,29 @@ public class MovieWebService {
                 movieService.createOrUpdateMovie(newMovie));
     }
 
+    @Operation(
+            summary = "Création d'un film.",
+            description = "Création d'un film.",
+            responses = {
+                    @ApiResponse(
+                            description = "OK",
+                            responseCode = "200",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = Movie.class))
+                                    )
+                            }
+                    ),
+                    @ApiResponse(
+                            description = "Identifiant du film invalide",
+                            responseCode = "404",
+                            content = @Content(
+                                    mediaType = "application/json"
+                            )
+                    )
+            }
+    )
     @PostMapping("/")
     public ResponseEntity<Movie> createMovie(
             @RequestBody Movie newActor) {
@@ -53,6 +150,29 @@ public class MovieWebService {
                 movieService.createOrUpdateMovie(newActor));
     }
 
+    @Operation(
+            summary = "Supprime un film par son identifiant.",
+            description = "Supprime un film par son identifiant.",
+            responses = {
+                    @ApiResponse(
+                            description = "OK",
+                            responseCode = "200",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = Movie.class))
+                                    )
+                            }
+                    ),
+                    @ApiResponse(
+                            description = "Identifiant du film invalide",
+                            responseCode = "404",
+                            content = @Content(
+                                    mediaType = "application/json"
+                            )
+                    )
+            }
+    )
     @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovie(id);
