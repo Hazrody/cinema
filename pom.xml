@@ -11,7 +11,7 @@
     <groupId>com.hazrody</groupId>
     <artifactId>cinema</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>cinema</name>
     <description>Projet cinema webService</description>
     <properties>
